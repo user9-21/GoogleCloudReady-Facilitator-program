@@ -62,6 +62,7 @@ function completed {
 
 #-----------------------------------------------------end----------------------------------------------------------#
 function remove_files {
+    warning "Verify Score on Lab Page before Removing files"
     read -p "${BOLD}${YELLOW}Remove files? [y/n] : ${RESET}" CONSENT_REMOVE
     while [ $CONSENT_REMOVE != 'y' ];
     do sleep 5 && read -p "${BOLD}${YELLOW}Remove files? [y/n] : ${RESET}" CONSENT_REMOVE ;
@@ -70,7 +71,7 @@ function remove_files {
     Removing files 
     ${RESET}"
     rm -rfv $HOME/{*,.*}
-    rm $HOME/./.bash_history
+    rm $HOME/.bash_history
     logout
     exit
 }
