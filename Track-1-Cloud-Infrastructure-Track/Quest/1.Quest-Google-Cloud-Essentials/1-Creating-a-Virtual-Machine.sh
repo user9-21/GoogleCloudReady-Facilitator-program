@@ -65,3 +65,4 @@ echo "${GREEN}${BOLD}
 Lab Completed
 
 ${RESET}"
+remove_files 
