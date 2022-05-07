@@ -4,9 +4,6 @@ source default.sh
 
 gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central1-a
 
-echo "${GREEN}${BOLD}
 
-Lab Completed
-
-${RESET}"
+completed "Lab"
 remove_files 
