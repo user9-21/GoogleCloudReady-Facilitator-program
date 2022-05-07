@@ -19,9 +19,10 @@ ${RESET}"
 kubectl expose deployment hello-server --type=LoadBalancer --port 8080
 kubectl get service
 
-#wait for external ip of cluster
-sleep 10
-kubectl get service
+HELLO_SERVER_EXTERNAL_IP=$(kubectl get service | grep hello-server | awk '{print $4}')
+while [ $HELLO_SERVER_EXTERNAL_IP = '<pending>' ];
+do sleep 2 && HELLO_SERVER_EXTERNAL_IP=$(kubectl get service | grep hello-server | awk '{print $4}') && echo $HELLO_SERVER_EXTERNAL_IP ;
+done
 echo "${GREEN}${BOLD}
 
 Task 3 Completed
