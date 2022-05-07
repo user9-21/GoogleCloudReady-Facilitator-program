@@ -37,11 +37,8 @@ gcloud compute firewall-rules create www-firewall-network-lb \
     --target-tags network-lb-tag --allow tcp:80
 sleep 5    
 gcloud compute instances list
-echo "${GREEN}${BOLD}
 
-Task 1 Completed
-
-${RESET}"
+completed "Task 1"
 
 
 gcloud compute addresses create network-lb-ip-1 \
@@ -57,11 +54,9 @@ gcloud compute forwarding-rules create www-rule \
     --address network-lb-ip-1 \
     --target-pool www-pool
     
-echo "${GREEN}${BOLD}
 
-Task 2 Completed
+completed "Task 2"
 
-${RESET}"   
 gcloud compute forwarding-rules describe www-rule --region us-central1
 gcloud compute forwarding-rules describe www-rule --format='get(IPAddress)'
 export IP_ADDRESS=$(gcloud compute forwarding-rules describe www-rule --format='value(IPAddress)')
@@ -128,15 +123,10 @@ gcloud compute forwarding-rules create http-content-rule \
     --target-http-proxy=http-lb-proxy \
     --ports=80
     
-echo "${GREEN}${BOLD}
 
-Task 3 Completed
+completed "Task 3"
 
-${RESET}"
-
-echo "${GREEN}${BOLD}
-
-Lab Completed
-
-${RESET}"
+completed "Lab"
+warning "just checking it"
+warning "Done"
 remove_files 
