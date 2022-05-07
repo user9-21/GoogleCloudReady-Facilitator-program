@@ -32,7 +32,7 @@ ${RESET}"
 gcloud container clusters delete my-cluster
 
 echo "${GREEN}${BOLD}
-
+remove_files 
 Task 4 Completed
 
 ${RESET}"
