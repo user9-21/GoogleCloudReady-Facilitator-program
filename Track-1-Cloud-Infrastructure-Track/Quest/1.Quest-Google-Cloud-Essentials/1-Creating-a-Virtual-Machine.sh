@@ -2,6 +2,7 @@ curl -o default.sh https://raw.githubusercontent.com/user9-21/GoogleCloudReady-F
 source default.sh
 
 export PROJECT=$GOOGLE_CLOUD_PROJECT
+gsutil mb gs://$PROJECT
 cat > ssh.sh <<EOF
 sudo apt-get update
 sudo apt-get install nginx -y
@@ -16,12 +17,13 @@ exit
 EOF
 
 chmod +x ssh.sh
+gsutil cp ssh.sh gs://$PROJECT
 echo "${CYAN}${BOLD}
 
 File permission granted to ssh.sh
 
 ${RESET}"
-gcloud compute instances create gcelab --machine-type n1-standard-2 --zone us-central1-f --tags=http-server --create-disk=auto-delete=yes,boot=yes,device-name=gcela,image=projects/debian-cloud/global/images/debian-10-buster-v20210916,mode=rw,size=10,type=projects/$PROJECT/zones/us-central1-f/diskTypes/pd-balanced 
+gcloud compute instances create gcelab --machine-type n1-standard-2 --zone us-central1-f --tags=http-server --create-disk=auto-delete=yes,boot=yes,device-name=gcela,image=projects/debian-cloud/global/images/debian-10-buster-v20210916,mode=rw,size=10,type=projects/$PROJECT/zones/us-central1-f/diskTypes/pd-balanced --metadata=startup-script-url=gs://$PROJECT/ssh.sh --scopes=https://www.googleapis.com/auth/devstorage.read_only
 
 gcloud compute firewall-rules create default-allow-http \
     --network=default \
