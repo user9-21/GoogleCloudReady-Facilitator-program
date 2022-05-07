@@ -2,30 +2,46 @@ curl -o default.sh https://raw.githubusercontent.com/user9-21/GoogleCloudReady-F
 source default.sh
 
 export PROJECT=$GOOGLE_CLOUD_PROJECT
-gcloud compute instances create gcelab --machine-type n1-standard-2 --zone us-central1-f --tags=http-server --create-disk=auto-delete=yes,boot=yes,device-name=gcela,image=projects/debian-cloud/global/images/debian-10-buster-v20210916,mode=rw,size=10,type=projects/$PROJECT/zones/us-central1-f/diskTypes/pd-balanced 
 cat > ssh.sh <<EOF
-sudo su -
-apt-get update
-apt-get install nginx -y
-ps auwx | grep nginx
-exit
-exit
+sudo apt-get update
+sudo apt-get install nginx -y
+
 echo "${GREEN}${BOLD}
 
 Task 1 Completed
 
 ${RESET}"
+exit
+
 EOF
+
 chmod +x ssh.sh
 echo "${CYAN}${BOLD}
 
 File permission granted to ssh.sh
 
 ${RESET}"
+gcloud compute instances create gcelab --machine-type n1-standard-2 --zone us-central1-f --tags=http-server --create-disk=auto-delete=yes,boot=yes,device-name=gcela,image=projects/debian-cloud/global/images/debian-10-buster-v20210916,mode=rw,size=10,type=projects/$PROJECT/zones/us-central1-f/diskTypes/pd-balanced 
+
+gcloud compute firewall-rules create default-allow-http \
+    --network=default \
+    --action=allow \
+    --direction=ingress \
+    --source-ranges=0.0.0.0/0 \
+    --target-tags=http-server \
+    --rules=tcp:80
+EXTERNAL_IP=$( gcloud compute instances list --format='value(EXTERNAL_IP)')
 gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central1-f 
+echo "${YELLOW}${BOLD}
+Navigate Here -${CYAN} http://$EXTERNAL_IP
+${YELLOW}
+if error in opening external ip of `gcelab` NAVIGATE here and Allow HTTP Traffic - 
+${CYAN}
+https://console.cloud.google.com/compute/instancesEdit/zones/us-central1-f/instances/gcelab?project=$GOOGLE_CLOUD_PROJECT
 
+${RESET}"
 
-gcloud compute scp --zone=$ZONE --quiet ssh.sh gcelab:~
+gcloud compute scp --zone=us-central1-f  --quiet ssh.sh gcelab:~
 
 echo "${BOLD}${YELLOW}
 
