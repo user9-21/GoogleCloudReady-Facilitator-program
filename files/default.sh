@@ -43,6 +43,13 @@ USER_EMAIL=$(gcloud auth list --limit=1 2>/dev/null | grep '@' | awk '{print $2}
 #echo "${GREEN}${BOLD}Task 1 Completed${RESET}"
 
 
+function warning {
+       echo "${BOLD}${YELLOW} $1 ${RESET}"
+ }
+
+function completed {
+       echo "${BOLD}${GREEN} $1 Completed ${RESET}"
+ }
 
 
 
