@@ -7,11 +7,7 @@ cat > ssh.sh <<EOF
 sudo apt-get update
 sudo apt-get install nginx -y
 
-echo "${GREEN}${BOLD}
 
-Task 1 Completed
-
-${RESET}"
 exit
 
 EOF
@@ -34,6 +30,7 @@ gcloud compute firewall-rules create default-allow-http \
     --rules=tcp:80
 EXTERNAL_IP=$( gcloud compute instances list --format='value(EXTERNAL_IP)')
 gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central1-f 
+
 echo "${YELLOW}${BOLD}
 Navigate Here -${CYAN} http://$EXTERNAL_IP
 ${YELLOW}
@@ -42,7 +39,11 @@ ${CYAN}
 https://console.cloud.google.com/compute/instancesEdit/zones/us-central1-f/instances/gcelab?project=$GOOGLE_CLOUD_PROJECT
 
 ${RESET}"
+echo "${GREEN}${BOLD}
 
+Task 1 Completed
+
+${RESET}"
 gcloud compute scp --zone=us-central1-f  --quiet ssh.sh gcelab:~
 
 echo "${BOLD}${YELLOW}
@@ -52,7 +53,11 @@ ${YELLOW}and Run this in ssh:
 ${BG_RED}
 ./ssh.sh
 ${RESET}"
+echo "${GREEN}${BOLD}
 
+Task 2 Completed
+
+${RESET}"
 
 
 echo "${GREEN}${BOLD}
