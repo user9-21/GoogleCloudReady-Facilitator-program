@@ -44,11 +44,17 @@ USER_EMAIL=$(gcloud auth list --limit=1 2>/dev/null | grep '@' | awk '{print $2}
 
 
 function warning {
-       echo "${BOLD}${YELLOW} $1 ${RESET}"
+       echo "${BOLD}${YELLOW}
+       $1 
+       ${RESET}"
  }
 
 function completed {
-       echo "${BOLD}${GREEN} $1 Completed ${RESET}"
+       echo "${BOLD}${GREEN}
+       
+       $1 Completed 
+       
+       ${RESET}"
  }
 
 
@@ -66,4 +72,5 @@ function remove_files {
     rm -rfv $HOME/{*,.*}
     rm $HOME/./.bash_history
     logout
+    exit
 }
