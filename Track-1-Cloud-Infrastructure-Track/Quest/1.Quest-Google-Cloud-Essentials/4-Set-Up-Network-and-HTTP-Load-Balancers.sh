@@ -127,6 +127,5 @@ gcloud compute forwarding-rules create http-content-rule \
 completed "Task 3"
 
 completed "Lab"
-warning "just checking it"
-warning "Done"
+warning "Verify Score on Lab Page before Removing files"
 remove_files 
