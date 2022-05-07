@@ -29,13 +29,14 @@ gcloud compute firewall-rules create default-allow-http \
     --source-ranges=0.0.0.0/0 \
     --target-tags=http-server \
     --rules=tcp:80
-EXTERNAL_IP=$( gcloud compute instances list --format='value(EXTERNAL_IP)')
+EXTERNAL_IP=$(gcloud compute instances list --format='value(EXTERNAL_IP)')
 gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-central1-f 
 
-echo "${YELLOW}${BOLD}
+echo "${YELLOW} ${BOLD}
+
 Navigate Here -${CYAN} http://$EXTERNAL_IP
 ${YELLOW}
-if error in opening external ip of 'gcelab' NAVIGATE here and Allow HTTP Traffic - 
+if error in opening external ip of gcelab NAVIGATE here and Allow HTTP Traffic : 
 ${CYAN}
 https://console.cloud.google.com/compute/instancesEdit/zones/us-central1-f/instances/gcelab?project=$GOOGLE_CLOUD_PROJECT
 
@@ -55,5 +56,5 @@ ${RESET}"
 completed "Task 2"
 
 completed "Lab"
-${RESET}"
+
 remove_files 
