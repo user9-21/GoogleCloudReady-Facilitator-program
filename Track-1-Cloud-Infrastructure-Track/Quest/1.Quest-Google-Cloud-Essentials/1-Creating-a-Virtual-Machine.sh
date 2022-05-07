@@ -37,7 +37,7 @@ gcloud compute instances create gcelab2 --machine-type n1-standard-2 --zone us-c
 echo "${YELLOW}${BOLD}
 Navigate Here -${CYAN} http://$EXTERNAL_IP
 ${YELLOW}
-if error in opening external ip of `gcelab` NAVIGATE here and Allow HTTP Traffic - 
+if error in opening external ip of 'gcelab' NAVIGATE here and Allow HTTP Traffic - 
 ${CYAN}
 https://console.cloud.google.com/compute/instancesEdit/zones/us-central1-f/instances/gcelab?project=$GOOGLE_CLOUD_PROJECT
 
@@ -47,12 +47,12 @@ gcloud compute scp --zone=us-central1-f  --quiet ssh.sh gcelab:~
 
 echo "${BOLD}${YELLOW}
 
-Run this in ssh:
+if NGINX is not installed in gcelab, ssh to gcelab using this command :${CYAN} gcloud compute ssh gcelab --zone=us-central1-f 
+${YELLOW}and Run this in ssh:
 ${BG_RED}
 ./ssh.sh
 ${RESET}"
 
-gcloud compute ssh gcelab --zone=us-central1-f
 
 
 echo "${GREEN}${BOLD}
