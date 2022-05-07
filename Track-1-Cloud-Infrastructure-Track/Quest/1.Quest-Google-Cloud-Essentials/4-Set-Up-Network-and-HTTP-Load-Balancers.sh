@@ -67,11 +67,10 @@ gcloud compute forwarding-rules describe www-rule --format='get(IPAddress)'
 export IP_ADDRESS=$(gcloud compute forwarding-rules describe www-rule --format='value(IPAddress)')
 echo $IP_ADDRESS
 
-echo "${YELLOW}${BOLD}
+#echo "${YELLOW}${BOLD}After some curl request, verify it and press `CTRL+C` Only once Carefully to exit the curl and continue with remaining command${RESET}"
 
-After some curl request, verify it and press `CTRL+C` Only once Carefully to exit the curl and continue with remaining command
-${RESET}"
-while true; do curl -m1 $IP_ADDRESS; done
+for i in {1..50}; do  curl -m1 $IP_ADDRESS; done
+#while true; do curl -m1 $IP_ADDRESS; done
 
 
 
@@ -140,3 +139,4 @@ echo "${GREEN}${BOLD}
 Lab Completed
 
 ${RESET}"
+remove_files 
