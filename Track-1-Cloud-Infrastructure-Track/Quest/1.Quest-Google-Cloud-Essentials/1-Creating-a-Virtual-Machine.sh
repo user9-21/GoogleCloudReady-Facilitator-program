@@ -21,6 +21,7 @@ File permission granted to ssh.sh
 ${RESET}"
 gcloud compute instances create gcelab --machine-type n1-standard-2 --zone us-central1-f --tags=http-server --create-disk=auto-delete=yes,boot=yes,device-name=gcela,image=projects/debian-cloud/global/images/debian-10-buster-v20210916,mode=rw,size=10,type=projects/$PROJECT/zones/us-central1-f/diskTypes/pd-balanced --metadata=startup-script-url=gs://$PROJECT/ssh.sh --scopes=https://www.googleapis.com/auth/devstorage.read_only
 
+
 gcloud compute firewall-rules create default-allow-http \
     --network=default \
     --action=allow \
@@ -39,11 +40,8 @@ ${CYAN}
 https://console.cloud.google.com/compute/instancesEdit/zones/us-central1-f/instances/gcelab?project=$GOOGLE_CLOUD_PROJECT
 
 ${RESET}"
-echo "${GREEN}${BOLD}
 
-Task 1 Completed
-
-${RESET}"
+completed "Task 1"
 gcloud compute scp --zone=us-central1-f  --quiet ssh.sh gcelab:~
 
 echo "${BOLD}${YELLOW}
@@ -53,16 +51,9 @@ ${YELLOW}and Run this in ssh:
 ${BG_RED}
 ./ssh.sh
 ${RESET}"
-echo "${GREEN}${BOLD}
 
-Task 2 Completed
+completed "Task 2"
 
-${RESET}"
-
-
-echo "${GREEN}${BOLD}
-
-Lab Completed
-
+completed "Lab"
 ${RESET}"
 remove_files 
