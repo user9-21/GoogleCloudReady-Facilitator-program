@@ -15,19 +15,16 @@ while [ $VERIFY_DETAILS != 'y' ];
 do echo " " && read -p "${BOLD}${YELLOW}Enter Dataset name : ${RESET}" DATASET_NAME && read -p "${BOLD}${YELLOW}Enter Table name : ${RESET}" TABLE_NAME && echo "${BOLD} " && echo "${YELLOW}Your Dataset name :${CYAN} $DATASET_NAME" && echo "${YELLOW}Your Table name :${CYAN} $TABLE_NAME" && echo " " && read -p "${BOLD}${YELLOW}Verify all details are correct? [ y/n ] : ${RESET}" VERIFY_DETAILS;
 done
 
+bq mk $DATASET_NAME
 sed -i "s/<DATASET NAME>/$DATASET_NAME/g" script.sh
 sed -i "s/<TABLE NAME>/$TABLE_NAME/g" script.sh
 
 cp script.sh bq.sh
-sed -i '4,25d' bq.sh
+sed -i '1d;4,27d' bq.sh
 
 chmod +x bq.sh
 ./bq.sh
 
-echo "${BOLD} "
-echo "${YELLOW}Your Dataset name :${CYAN} $DATASET_NAME  "
-echo "${YELLOW}Your Table name :${CYAN} $TABLE_NAME  "
-bq mk $DATASET_NAME
 
 bq query --use_legacy_sql=false \
 '
