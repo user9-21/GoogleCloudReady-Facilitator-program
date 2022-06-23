@@ -19,7 +19,7 @@ sed -i "s/<DATASET NAME>/$DATASET_NAME/g" script.sh
 sed -i "s/<TABLE NAME>/$TABLE_NAME/g" script.sh
 
 cp script.sh bq.sh
-#sed -i '1d;4,21d' bq.sh
+sed -i '4,25d' bq.sh
 
 chmod +x bq.sh
 ./bq.sh
