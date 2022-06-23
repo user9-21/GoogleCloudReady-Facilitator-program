@@ -55,6 +55,7 @@ function completed {
        $1 Completed 
        
        ${RESET}"
+       tput sc;tput cup 0 $(($(tput cols)-11));echo "${BOLD}${GREEN}$1 ${RESET}";tput rc;
  }
 
 
